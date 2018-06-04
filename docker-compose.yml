@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  app:
+    container_name: app
+    build: ./app
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/app/
+      - /usr/app/node_modules
+  www:
+    container_name: www
+    image: wordpress:latest
+    depends_on:
+      - www-db
+    environment:
+      WORDPRESS_DB_HOST: www-db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    ports:
+      - "8000:80"
+    restart: always
+  www-db:
+    container_name: www-db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    restart: always
+    volumes:
+      - wp_data:/var/lib/mysql
+
+volumes:
+  wp_data:

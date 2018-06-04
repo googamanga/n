@@ -1,0 +1,87 @@
+{
+  "name": "mw-express",
+  "version": "0.1.0",
+  "description": "Node.js express middleware used as the UX API for SPA/PWA.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel src --out-dir build -s --ignore src/__tests__/**",
+    "build": "npm run clean && npm run build-server",
+    "prestart": "npm run build",
+    "start": "node ./build/index.js",
+    "lint": "eslint src",
+    "test": "jest",
+    "watch-tests": "esw src & jest --watchAll",
+    "dev": "nodemon --watch ./src --ignore ./src/__tests__ -x \"npm start\"",
+    "coverage": "jest --coverage"
+  },
+  "engines": {
+    "node": "8.11.2"
+  },
+  "dependencies": {
+    "babel-cli": "6.26.0",
+    "babel-polyfill": "6.26.0",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.7.0",
+    "body-parser": "1.18.1",
+    "cors": "2.8.4",
+    "express": "4.16.3",
+    "express-simple-errors": "1.0.0",
+    "isvalid": "1.6.6"
+  },
+  "devDependencies": {
+    "babel-jest": "23.0.1",
+    "eslint": "4.19.1",
+    "eslint-watch": "3.1.5",
+    "jest": "23.0.1",
+    "nodemon": "1.17.5",
+    "supertest": "3.1.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 8,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
+  }
+}
