@@ -12,8 +12,8 @@ export default function ()  {
     // TODO res.locals.user = await db.user(userTable)
     // .catch((err) => next(err));
     res.locals.user = {
-      name: 'Nesbert Hidalgo',
-      email: 'nesbert[at]gmail.com',
+      name: 'Alex Gaputin',
+      email: 'alexgaputin[at]gmail.com',
     };
     next();
   }
